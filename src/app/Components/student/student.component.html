@@ -1,0 +1,107 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand">
+        <img src="/assets/cdacicon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <span><strong> C-DAC</strong></span>
+    </a>
+</nav>
+<br>
+<br>
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-3 sidenav">
+            <h4>Student</h4>
+            <div class="list-group">
+                <button type="button" class="list-group-item list-group-item-action"
+                    (click)='viewNotification()'>Notifications</button>
+                <button type="button" class="list-group-item list-group-item-action"
+                    (click)='viewAssignment()'>Assignments</button>
+                <button type="button" class="list-group-item list-group-item-action"
+                    (click)='viewAttendance()'>Attendance</button>
+            </div>
+        </div>
+
+        <div class="col-sm-9">
+
+            <!--View Assignments-->
+            <div *ngIf="viewAssignmentSts">
+                <h2>List of Assignments</h2>
+                <table class="table table-hover table-sm">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Assignment</th>
+                            <th scope="col">Department</th>
+                            <th scope="col">Course</th>
+                            <th scope="col">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr *ngFor="let y of fileInfos | async">
+                            <th scope="row"><a href="{{y.url}}">{{y.name}}</a></th>
+                            <td>{{y.department}}</td>
+                            <td>{{y.course}}</td>
+                            <td>{{y.description}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+            <!--View Notifications-->
+            <div *ngIf="viewNotificationSts">
+                <h2>List of Notifications</h2>
+
+                <table class="table table-hover table-sm">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Notification</th>
+                            <th scope="col">Department</th>
+                            <th scope="col">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr *ngFor="let y of fileInfos | async">
+                            <th scope="row"><a href="{{y.url}}">{{y.name}}</a></th>
+                            <td>{{y.department}}</td>
+                            <td>{{y.description}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <!--View attendance-->
+            <div class="container-fluid" *ngIf="viewAttendanceSts">
+                <h2>Attendance List</h2>
+                <br />
+                <table class="table table-hover table-sm">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">User Id</th>
+                            <th scope="col">Remark</th>
+                            <th scope="col">Department</th>
+                            <th scope="col">Course</th>
+                            <th scope="col">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+                        <tr *ngFor="let y of alldata">
+                            <th scope="row">{{y.user.id}}</th>
+                            <td>{{y.remark}}</td>
+                            <td>{{y.department.id}}</td>
+                            <td>{{y.course.id}}</td>
+                            <td>{{y.date}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+</div>

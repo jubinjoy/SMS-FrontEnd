@@ -1,0 +1,75 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand">
+        <img src="/assets/cdacicon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <span><strong> C-DAC</strong></span>
+    </a>
+</nav>
+
+<div class="container">
+    <div class="columns is-centered">
+        <div class="box column is-half">
+            <br />
+            <h3>Modify Attendance</h3>
+            <table class="table table-hover table-sm">
+                <caption>Add Attendance</caption>
+                <tr>
+                    <th> Date </th>
+                    <th> :</th>
+                    <th><input class="input" type="date" [ngModel]="attendance.date |date:'yyyy-MM-dd'"
+                            (ngModelChange)="attendance.date = $event" /></th>
+                </tr>
+
+                <tr>
+                    <th> Id </th>
+                    <th> :</th>
+                    <th><input [(ngModel)]='attendance.user.id' /></th>
+                </tr>
+                <tr>
+                    <th>Remark : </th>
+                    <th>
+                        <div class="select is-fullwidth">
+                            <select [(ngModel)]="attendance.remark">
+                                <option value="P">Present</option>
+                                <option value="A">Absent</option>
+                            </select>
+                        </div>
+                    </th>
+                    <th><input [(ngModel)]='attendance.remark' disabled /></th>
+                </tr>
+                <tr>
+                    <th>Department : </th>
+                    <th>
+                        <div class="select is-fullwidth">
+                            <select [(ngModel)]="attendance.department.id">
+                                <option value=1>Dac</option>
+                                <option value=2>Desd</option>
+                            </select>
+                        </div>
+                    </th>
+                    <th><input [(ngModel)]='attendance.department.id' disabled /></th>
+                </tr>
+                <tr>
+                    <th>Course : </th>
+                    <th>
+                        <div class="select is-fullwidth">
+                            <select [(ngModel)]="attendance.course.id">
+                                <option value=1>Data Structure</option>
+                                <option value=2>Angular</option>
+                                <option value=3>Java</option>
+                                <option value=4>SpringBoot</option>
+                            </select>
+                        </div>
+                    </th>
+                    <th><input [(ngModel)]='attendance.course.id' disabled /></th>
+                </tr>
+            </table>
+
+            <button class="btn btn-success" (click)='updateAttendance()'>Update Attendance</button>
+            <br />
+            <br />
+            <div class="has-text-centered">
+                <h3>{{message}}</h3>
+            </div>
+        </div>
+    </div>
+</div>

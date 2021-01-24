@@ -1,0 +1,211 @@
+<nav class="navbar navbar-light navbar-dark bg-dark">
+    <a class="navbar-brand">
+        <img src="/assets/cdacicon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <span><strong> C-DAC</strong></span>
+    </a>
+    <div class="div-inline" *ngIf="viewSts">
+        <input class=" mr-sm-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]='user.email'>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
+            (click)='activateSearch(user.email)'>Search</button>
+    </div>
+
+</nav>
+
+<br>
+<br>
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-3 sidenav">
+            <h4>Admin Functions</h4>
+            <div class="list-group">
+                <button type="button" class="list-group-item list-group-item-action" (click)='activateAddUser()'>Add
+                    User</button>
+                <button type="button" class="list-group-item list-group-item-action" (click)='activateViewUser()'>View
+                    User</button>
+
+                <button type="button" class="list-group-item list-group-item-action" (click)='activateUploadNotification()'>Add
+                    Notification </button>
+                <button type="button" class="list-group-item list-group-item-action" (click)='viewNotification()'>View Notifications </button>
+
+            </div>
+        </div>
+
+        <div class="col-sm-9" *ngIf="addSts">
+            <h3>{{task}} User</h3>
+            <table class="table table-hover table-sm">
+                <caption>{{task}} User</caption>
+                <tr *ngIf="modSts">
+                    <th> ID </th>
+                    <th> :</th>
+                    <th><input [(ngModel)]='user.id' disabled="disableId" /></th>
+                </tr>
+                <tr>
+                    <th> First Name </th>
+                    <th> :</th>
+                    <th><input [(ngModel)]='user.firstName' /></th>
+                </tr>
+                <tr>
+                    <th> Last name </th>
+                    <th> :</th>
+                    <th><input [(ngModel)]='user.lastName' /></th>
+                </tr>
+                <tr>
+                    <th> Email </th>
+                    <th> :</th>
+                    <th><input [(ngModel)]='user.email' /></th>
+                </tr>
+                <tr>
+                    <th> Password </th>
+                    <th> :</th>
+                    <th><input [(ngModel)]='user.password' /></th>
+                </tr>
+                <tr>
+                    <th> Phone </th>
+                    <th> :</th>
+                    <th><input [(ngModel)]='user.phone' /></th>
+                </tr>
+
+                <tr>
+                    <th>Role : </th>
+                    <th>
+                        <div class="select is-fullwidth">
+                            <select [(ngModel)]="user.roles.roleId">
+                                <option value=1>Admin</option>
+                                <option value=2>Student</option>
+                                <option value=3>Instructor</option>
+                            </select>
+                        </div>
+                    </th>
+                    <th><input [(ngModel)]='user.roles.roleId' /></th>
+                </tr>
+                <tr>
+                    <th>Department : </th>
+                    <th>
+                        <div class="select is-fullwidth">
+                            <select [(ngModel)]="user.department.id">
+                                <option value=1>Dac</option>
+                                <option value=2>Desd</option>
+                            </select>
+                        </div>
+                    </th>
+                    <th><input [(ngModel)]='user.department.id' /></th>
+                </tr>
+            </table>
+
+            <button class="btn btn-success" (click)='addUser()' *ngIf="addBtnSts">Add User</button>
+            <button class="btn btn-success" (click)='modUser()' *ngIf="modBtnSts">Modify User</button>
+            <br />{{message}}
+        </div>
+
+        <!--View user-->
+        <div *ngIf="viewSts">
+
+            <table class="table table-hover table-sm">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Department</th>
+                        <th scope="col">Task</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                    <tr *ngFor="let y of alldata">
+                        <th scope="row">{{y.id}}</th>
+                        <td>{{y.firstName}}</td>
+                        <td>{{y.lastName}}</td>
+                        <td>{{y.email}}</td>
+                        <td>{{y.phone}}</td>
+                        <td *ngIf="y.roles.roleId ==1">Admin</td>
+                        <td *ngIf="y.roles.roleId ==2">Student</td>
+                        <td *ngIf="y.roles.roleId ==3">Instructor</td>
+                        <td *ngIf="y.department.id ==1">Dac</td>
+                        <td *ngIf="y.department.id ==2">Desd</td>
+                        <td>
+                            <button class="btn btn-success" (click)='edit(y.email)'>Edit</button>
+                            <button class="btn btn-success" (click)='activateRemoveUser(y.id)'>Delete</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="col-sm-9" *ngIf="addNotificationSts">
+            <h3>Upload Notification</h3>
+            <table class="table table-hover table-sm">
+                <caption> Upload</caption>
+                <tr>
+                    <th>Department  : </th>
+                    <th>
+                        <div class="select is-fullwidth">
+                            <select [(ngModel)]="notification.department">
+                                <option value=Dac>Dac</option>
+                                <option value=Desd>Desd</option>
+                            </select>
+                        </div>
+                    </th>
+                    <th><input [(ngModel)]='notification.department'/></th>
+                </tr>
+               
+                <tr>
+                    <th> Description  </th>
+                    <th> :</th>
+                    <th><input [(ngModel)]='notification.description' /></th>
+                </tr>
+                
+            </table>
+
+            <label class="btn btn-default">
+                <input type="file" (change)="selectFile($event)" />
+              </label>
+              
+              <button class="btn btn-success"  (click)="uploadNotification()">
+                Upload Notification
+              </button>
+              <br/>
+              {{message}}
+        </div>
+
+
+
+        <!--View  Assignments-->
+        <div *ngIf="viewNotificationSts">
+            <h2>List of Notifications</h2>
+
+            <table class="table table-hover table-sm">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Assignment</th>
+                        <th scope="col">Department</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Task</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr *ngFor="let y of fileInfos | async">
+                        <th scope="row"><a href ="{{y.url}}">{{y.name}}</a></th>
+                        <td>{{y.department}}</td>
+                        <td>{{y.description}}</td>
+                        <td>
+                            <button class="btn btn-success" (click)='delete(y.id)'>Delete</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        
+
+
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand">
+        <img src="/assets/cdacicon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <span><strong> C-DAC</strong></span>
+    </a>
+</nav>
+<br>
+<br>
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-3 sidenav">
+            <h4>Select your role..</h4>
+            <div class="list-group">
+                <button type="button" class="list-group-item list-group-item-action"
+                    (click)='userType(1)'>Student</button>
+                <button type="button" class="list-group-item list-group-item-action"
+                    (click)='userType(2)'>Faculty</button>
+                <button type="button" class="list-group-item list-group-item-action"
+                    (click)='userType(3)'>Admin</button>
+            </div>
+        </div>
+
+        <div class="col-sm-9">
+
+            <h2>About C-dac</h2>
+            <p>C-DAC, Bengaluru centre, is the 2nd of C DAC centres to be established in 1989 to carry-out research and
+                deliver solutions and products in the area of System Software for PARAM series of super computers of
+                C-DAC.</p>
+
+            <hr>
+            <h3>Features of the project</h3>
+            <h4>Admin</h4>
+            <li>
+                <ul>Add Notification .</ul>
+                <ul>Add users</ul>
+                <ul>Modify and delete user data</ul>
+            </li>
+            <h4>Faculty</h4>
+            <li>
+                <ul>Add Assignments .</ul>
+                <ul>Add Attendance</ul>
+                <ul>Add marksheet</ul>
+                <ul>View Notification .</ul>
+            </li>
+            <h4>Student</h4>
+            <li>
+                <ul>View Notification .</ul>
+                <ul>View Assignments</ul>
+                <ul>View Attendance</ul>
+            </li>
+
+            <br><br>
+
+        </div>
+    </div>
+</div>

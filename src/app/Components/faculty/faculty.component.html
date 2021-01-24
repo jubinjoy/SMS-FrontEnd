@@ -1,0 +1,136 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand">
+        <img src="/assets/cdacicon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <span><strong> C-DAC</strong></span>
+    </a>
+    <div class="div-inline" *ngIf="viewAssignmentSts">
+        <input class=" mr-sm-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]='assignment.department'>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" 
+            (click)='searchByDept(assignment.department)'>Search</button>
+    </div>
+</nav>
+
+<br>
+<br>
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-3 sidenav">
+            <h4>Faculty Functions</h4>
+            <div class="list-group">  
+                <button type="button" class="list-group-item list-group-item-action"
+                (click)='viewNotification()'>Notifications</button>         
+                <button type="button" class="list-group-item list-group-item-action"
+                (click)='addAssignment()'>Add Assignment</button>
+                <button type="button" class="list-group-item list-group-item-action"
+                (click)='viewAssignment()'>View Assignment</button>
+                <button type="button" class="list-group-item list-group-item-action"
+                (click)='activateAddAttendance()'>Add Attendance</button>
+                <button type="button" class="list-group-item list-group-item-action"
+                (click)='activateViewAttendance()'>View Attendance</button>
+              </div>
+        </div>
+
+
+        <div class="col-sm-9" *ngIf="addAssign">
+            <h3>Upload Assignment</h3>
+            <table class="table table-hover table-sm">
+                <caption> Upload</caption>
+                <tr>
+                    <th>Department  : </th>
+                    <th>
+                        <div class="select is-fullwidth">
+                            <select [(ngModel)]="assignment.department">
+                                <option value=Dac>Dac</option>
+                                <option value=Desd>Desd</option>
+                            </select>
+                        </div>
+                    </th>
+                    <th><input [(ngModel)]='assignment.department'/></th>
+                </tr>
+               
+                
+                <tr>
+                    <th> Course Name : </th>
+                    <th> :</th>
+                    <th><input [(ngModel)]='assignment.courseName'/></th>
+                </tr>
+                <tr>
+                    <th> Description  </th>
+                    <th> :</th>
+                    <th><input [(ngModel)]='assignment.description' /></th>
+                </tr>
+                
+            </table>
+
+            <label class="btn btn-default">
+                <input type="file" (change)="selectFile($event)" />
+              </label>
+              
+              <button class="btn btn-success"  (click)="upload()">
+                Upload
+              </button>
+              <br/>
+              {{message}}
+        </div>
+
+
+
+
+        <div *ngIf="viewAssignmentSts">
+            <h2>List of Assignments</h2>
+            <table class="table table-hover table-sm">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Assignment</th>
+                        <th scope="col">Department</th>
+                        <th scope="col">Course</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Taks</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr *ngFor="let y of fileInfos | async">
+                        <th scope="row"><a href ="{{y.url}}">{{y.name}}</a></th>
+                        <td>{{y.department}}</td>
+                        <td>{{y.course}}</td>
+                        <td>{{y.description}}</td>
+                        <td>
+                            <button class="btn btn-success" (click)='delete(y.id)'>Delete</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <!--View Notifications-->
+        <div *ngIf="viewNotificationSts">
+            <h2>List of Notifications</h2>
+
+            <table class="table table-hover table-sm">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Notifications</th>
+                        <th scope="col">Department</th>
+                        <th scope="col">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr *ngFor="let y of fileInfos | async">
+                        <th scope="row"><a href ="{{y.url}}">{{y.name}}</a></th>
+                        <td>{{y.department}}</td>
+                        <td>{{y.description}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+
+
+       
+    </div>
+</div>
+
