@@ -2,12 +2,14 @@
     <a class="navbar-brand">
         <img src="/assets/cdacicon.png" width="30" height="30" class="d-inline-block align-top" alt="">
         <span><strong> C-DAC</strong></span>
-    </a>
+    </a>  
     <div class="div-inline" *ngIf="viewSts">
         <input class=" mr-sm-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]='user.email'>
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
             (click)='activateSearch(user.email)'>Search</button>
     </div>
+    <button class="btn btn-outline-success my-2 my-sm-0" type="button"
+    (click)='logout()'>logout</button>
 
 </nav>
 
@@ -94,7 +96,9 @@
 
             <button class="btn btn-success" (click)='addUser()' *ngIf="addBtnSts">Add User</button>
             <button class="btn btn-success" (click)='modUser()' *ngIf="modBtnSts">Modify User</button>
-            <br />{{message}}
+            <br /><div class="has-text-centered">
+                <h3>{{message}}</h3>
+            </div>
         </div>
 
         <!--View user-->
@@ -171,7 +175,9 @@
                 Upload Notification
               </button>
               <br/>
-              {{message}}
+              <div class="has-text-centered">
+                <h3>{{message}}</h3>
+            </div>
         </div>
 
 

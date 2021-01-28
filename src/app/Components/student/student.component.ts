@@ -4,6 +4,8 @@ import {StudentServiceService} from 'src/app/services/student-service.service';
 import {Attendance} from 'src/app/Models/attendance';
 import {AttendanceServiceService} from 'src/app/services/attendance-service.service';
 import { formatDate } from '@angular/common';
+import {AuthenticationServiceService} from 'src/app/services/authentication-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-student',
@@ -17,11 +19,15 @@ export class StudentComponent implements OnInit {
   viewAssignmentSts : boolean = false;
   viewAttendanceSts : boolean ;
   alldata : Attendance[];
+  isLoggedIn :boolean = false;
 
-  constructor(private y : StudentServiceService,
-    private attendanceService : AttendanceServiceService , @Inject(LOCALE_ID) private locale: string) { }
+  constructor(private y : StudentServiceService, private authenticationService :AuthenticationServiceService,
+    private attendanceService : AttendanceServiceService , @Inject(LOCALE_ID) private locale: string,
+    private router : Router) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = this.authenticationService.isUserLoggedIn();
+    console.log('menu ->' + this.isLoggedIn);
   }
 
    //view Notification
@@ -58,4 +64,9 @@ export class StudentComponent implements OnInit {
 
   }
 
+
+  logout(){
+    this.authenticationService.logout();
+    this.router.navigate(["/"]);
+  }
 }

@@ -8,6 +8,7 @@ import {Attendance} from 'src/app/Models/attendance';
 import {Marksheet} from 'src/app/Models/marksheet';
 import { Router } from '@angular/router';
 //import * as fileSaver from 'file-saver';
+import {AuthenticationServiceService} from 'src/app/services/authentication-service.service';
 
 @Component({
   selector: 'app-faculty',
@@ -24,12 +25,16 @@ export class FacultyComponent implements OnInit {
   message : string = "";
   viewNotificationSts : boolean = false;
   fileInfos : Observable<any>;
+  isLoggedIn : boolean = false;
 
-  constructor(private y : FacultyServicesService, private router : Router) { 
+  constructor(private y : FacultyServicesService, private router : Router
+    ,private authenticationService : AuthenticationServiceService) { 
     this.assignment = new Assignment();
   }
 
   ngOnInit(): void {
+    this.isLoggedIn = this.authenticationService.isUserLoggedIn();
+    console.log('menu ->' + this.isLoggedIn);
   }
 
   selectFile(event) {
@@ -101,6 +106,11 @@ export class FacultyComponent implements OnInit {
   //to route to view-attendance page
   activateViewAttendance(){
     this.router.navigate(['/viewAttendance']);
+  }
+
+  logout(){
+    this.authenticationService.logout();
+    this.router.navigate(["/"]);
   }
 
 }

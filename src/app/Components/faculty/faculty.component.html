@@ -8,6 +8,8 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit" 
             (click)='searchByDept(assignment.department)'>Search</button>
     </div>
+    <button class="btn btn-outline-success my-2 my-sm-0" type="button"
+    (click)='logout()'>logout</button>
 </nav>
 
 <br>
@@ -70,7 +72,9 @@
                 Upload
               </button>
               <br/>
-              {{message}}
+              <div class="has-text-centered">
+                <h3>{{message}}</h3>
+            </div>
         </div>
 
 
