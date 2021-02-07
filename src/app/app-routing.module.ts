@@ -9,6 +9,7 @@ import {AdminPageComponent} from './Components/admin-page/admin-page.component';
 import {FacultyComponent} from './Components/faculty/faculty.component';
 import {StudentComponent} from './Components/student/student.component';
 import {AuthguardService} from './services/authguard.service';
+import {ViewSubmittedAssignmentComponent} from './Components/view-submitted-assignment/view-submitted-assignment.component';
 
 const routes: Routes = [
   {path : '' , component : HomeComponent},
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path : 'modifyAttendance/:assignID', component : ModifyAttendanceComponent ,canActivate:[AuthguardService]},
   {path : 'student' , component : StudentComponent,canActivate:[AuthguardService] },
   {path : 'admin' , component : AdminPageComponent ,canActivate:[AuthguardService]},
-  {path : 'faculty' , component : FacultyComponent ,canActivate:[AuthguardService]}
+  {path : 'faculty' , component : FacultyComponent ,canActivate:[AuthguardService]},
+  {path : 'viewSumittedAssign' , component : ViewSubmittedAssignmentComponent , canActivate:[AuthguardService]}
 ];
 
 @NgModule({

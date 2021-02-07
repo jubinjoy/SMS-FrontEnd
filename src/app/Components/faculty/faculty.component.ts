@@ -69,6 +69,8 @@ export class FacultyComponent implements OnInit {
       }
     );
     this.assignment.department = "";
+    this.assignment.courseName= "";
+    this.assignment.description = "";
     this.message = "";
   }
 
@@ -107,7 +109,11 @@ export class FacultyComponent implements OnInit {
   activateViewAttendance(){
     this.router.navigate(['/viewAttendance']);
   }
+  
 
+  activateViewAssignSubmitted(){
+    this.router.navigate(['/viewSumittedAssign']);
+  }
   logout(){
     this.authenticationService.logout();
     this.router.navigate(["/"]);

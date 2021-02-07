@@ -20,5 +20,9 @@ export class StudentServiceService {
     return this.ao.get(url);
   }
 
+  submitAssignmentService(formData : FormData): Observable<any>{
+      let url:string ="http://localhost:8080/submit";
+        return this.ao.post(url,formData);
+    }
 
 }

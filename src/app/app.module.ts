@@ -12,6 +12,7 @@ import { StudentComponent } from './Components/student/student.component';
 import { AddAttendanceComponent } from './Components/attendance/add-attendance/add-attendance.component';
 import { ViewAttendanceComponent } from './Components/attendance/view-attendance/view-attendance.component';
 import { ModifyAttendanceComponent } from './Components/attendance/modify-attendance/modify-attendance.component';
+import { ViewSubmittedAssignmentComponent } from './Components/view-submitted-assignment/view-submitted-assignment.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ModifyAttendanceComponent } from './Components/attendance/modify-attend
     StudentComponent,
     AddAttendanceComponent,
     ViewAttendanceComponent,
-    ModifyAttendanceComponent
+    ModifyAttendanceComponent,
+    ViewSubmittedAssignmentComponent
   ],
   imports: [
     BrowserModule,

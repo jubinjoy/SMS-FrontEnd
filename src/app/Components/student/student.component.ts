@@ -6,6 +6,8 @@ import {AttendanceServiceService} from 'src/app/services/attendance-service.serv
 import { formatDate } from '@angular/common';
 import {AuthenticationServiceService} from 'src/app/services/authentication-service.service';
 import { Router } from '@angular/router';
+import {StudentAssignment} from 'src/app/Models/student-assignment';
+import {Responsemessage} from 'src/app/Models/responsemessage';
 
 @Component({
   selector: 'app-student',
@@ -18,12 +20,17 @@ export class StudentComponent implements OnInit {
   viewNotificationSts : boolean = false;
   viewAssignmentSts : boolean = false;
   viewAttendanceSts : boolean ;
+  submitAssignSts : boolean = false;
   alldata : Attendance[];
   isLoggedIn :boolean = false;
+  assignment : StudentAssignment;
+  currentFile: File;
 
   constructor(private y : StudentServiceService, private authenticationService :AuthenticationServiceService,
     private attendanceService : AttendanceServiceService , @Inject(LOCALE_ID) private locale: string,
-    private router : Router) { }
+    private router : Router) { 
+      this.assignment = new StudentAssignment();
+    }
 
   ngOnInit(): void {
     this.isLoggedIn = this.authenticationService.isUserLoggedIn();
@@ -32,6 +39,7 @@ export class StudentComponent implements OnInit {
 
    //view Notification
    viewNotification(){
+    this.submitAssignSts = false;
     this.viewAttendanceSts=false;
     this.viewAssignmentSts = false;
     this.fileInfos = this.y.viewNotificationService();
@@ -40,6 +48,7 @@ export class StudentComponent implements OnInit {
 
   //view assignments
   viewAssignment(){
+    this.submitAssignSts = false;
     this.viewAttendanceSts=false;
       this.viewNotificationSts = false;
       this.fileInfos = this.y.viewAssignmentService();
@@ -47,6 +56,7 @@ export class StudentComponent implements OnInit {
   }
 
   viewAttendance(){
+    this.submitAssignSts = false;
     this.viewAssignmentSts = false;
     this.viewNotificationSts = false;
    this.attendanceService.viewAttendanceListService().subscribe(
@@ -61,6 +71,37 @@ export class StudentComponent implements OnInit {
       this.message=JSON.stringify(err);
      }
    )
+
+  }
+
+  //activate submit assignment
+  activateSubmitAssignment(){
+    this.viewAssignmentSts= false;
+    this.viewAttendanceSts = false ;
+    this.viewNotificationSts = false;
+    this.submitAssignSts = true;
+  }
+
+  //select file 
+  selectFile(event) {
+    this.currentFile = event.target.files[0];
+  }
+
+  //submit assignment
+  submitAssignment(){
+    const formData = new FormData();
+    formData.append('asgJson', JSON.stringify(this.assignment));
+    formData.append('File',this.currentFile);
+    this.y.submitAssignmentService(formData).subscribe(
+      (op : Responsemessage)=>{
+        this.message = op.message;
+      },
+      (err)=>{
+        this.message= JSON.stringify(err);
+      }
+    );
+    this.assignment.department = "";
+    this.message = "";
 
   }
 

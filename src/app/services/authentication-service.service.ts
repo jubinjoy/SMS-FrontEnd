@@ -22,11 +22,6 @@ export class AuthenticationServiceService {
     return this.ao.post<User>(url, user);
   }
 
-
-  createBasicAuthToken(username: String, password: String) {
-    return 'Basic ' + window.btoa(username + ":" + password)
-  }
-
   registerSuccessfulLogin(username, password) {
     sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME, username)
   }

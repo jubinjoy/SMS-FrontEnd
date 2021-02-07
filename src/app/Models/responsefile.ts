@@ -1,5 +1,3 @@
-import { LoginserviceService } from "../services/loginservice.service";
-
 export class Responsefile {
     name : string ; 
     url : string ;

@@ -43,5 +43,15 @@ export class FacultyServicesService {
     return this.ao.get(url);
   }
 
+  submitAssignmentService() : Observable<any>{
+    let url:string ="http://localhost:8080/submittedAssign";
+    return this.ao.get(url);
+  }
+
+  deleteSubmittedAssignmentService(id : number ): Observable<any>{
+    let url:string ="http://localhost:8080/submittedAssign/"+id;
+    return this.ao.delete<Responsemessage>(url);
+  }
+
 
 }

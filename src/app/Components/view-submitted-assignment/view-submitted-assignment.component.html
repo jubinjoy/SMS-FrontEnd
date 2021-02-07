@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand">
+        <img src="/assets/cdacicon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <span><strong> C-DAC</strong></span>
+    </a>
+</nav>  
+<div class="container-fluid">
+    <div class="columns is-centered">
+        <div class="box column is-half">
+            <h3>Assignments Submitted</h3>
+            <br />
+            <table class="table table-hover table-sm">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Assignment</th>
+                        <th scope="col">Student Name </th>
+                        <th scope="col">Department</th>
+                        <th scope="col">Course</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Taks</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr *ngFor="let y of fileInfos | async">
+                        <th scope="row"><a href="{{y.url}}">{{y.name}}</a></th>
+                        <td>{{y.studentName}}</td>
+                        <td>{{y.department}}</td>
+                        <td>{{y.course}}</td>
+                        <td>{{y.description}}</td>
+                        <td>
+                            <button class="btn btn-success" (click)='delete(y.id)'>Delete</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

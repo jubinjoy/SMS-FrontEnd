@@ -19,6 +19,8 @@
                     (click)='viewAssignment()'>Assignments</button>
                 <button type="button" class="list-group-item list-group-item-action"
                     (click)='viewAttendance()'>Attendance</button>
+                    <button type="button" class="list-group-item list-group-item-action"
+                (click)='activateSubmitAssignment()'>Submit Assignment</button>
             </div>
         </div>
 
@@ -101,6 +103,56 @@
 
                     </tbody>
                 </table>
+            </div>
+            
+
+            <!--Submit assignment-->
+            <div class="container-fluid" *ngIf="submitAssignSts">
+                <div class="col-sm-9" >
+                <h3>Upload Assignment</h3>
+                <table class="table table-hover table-sm">
+                    <caption> Upload</caption>
+                    <tr>
+                        <th> Student Name : </th>
+                        <th> :</th>
+                        <th><input [(ngModel)]='assignment.studentName'/></th>
+                    </tr>
+                    <tr>
+                        <th>Department  : </th>
+                        <th>
+                            <div class="select is-fullwidth">
+                                <select [(ngModel)]="assignment.department">
+                                    <option value=Dac>Dac</option>
+                                    <option value=Desd>Desd</option>
+                                </select>
+                            </div>
+                        </th>
+                        <th><input [(ngModel)]='assignment.department'/></th>
+                    </tr>                
+                    <tr>
+                        <th> Course Name : </th>
+                        <th> :</th>
+                        <th><input [(ngModel)]='assignment.courseName'/></th>
+                    </tr>
+                    <tr>
+                        <th> Description  </th>
+                        <th> :</th>
+                        <th><input [(ngModel)]='assignment.description' /></th>
+                    </tr>
+                    
+                </table>
+    
+                <label class="btn btn-default">
+                    <input type="file" (change)="selectFile($event)" />
+                  </label>
+                  
+                  <button class="btn btn-success"  (click)="submitAssignment()">
+                    Submit 
+                  </button>
+                  <br/>
+                  <div class="has-text-centered">
+                    <h3>{{message}}</h3>
+                </div>
             </div>
 
 
