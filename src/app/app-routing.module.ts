@@ -17,7 +17,7 @@ const routes: Routes = [
   {path : 'addAttendance' , component : AddAttendanceComponent,canActivate:[AuthguardService]},
   {path : 'viewAttendance' , component : ViewAttendanceComponent,canActivate:[AuthguardService]},
   {path : 'modifyAttendance/:assignID', component : ModifyAttendanceComponent ,canActivate:[AuthguardService]},
-  {path : 'student' , component : StudentComponent,canActivate:[AuthguardService] },
+  {path : 'student/:email' , component : StudentComponent,canActivate:[AuthguardService] },
   {path : 'admin' , component : AdminPageComponent ,canActivate:[AuthguardService]},
   {path : 'faculty' , component : FacultyComponent ,canActivate:[AuthguardService]},
   {path : 'viewSumittedAssign' , component : ViewSubmittedAssignmentComponent , canActivate:[AuthguardService]}

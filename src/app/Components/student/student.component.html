@@ -96,8 +96,12 @@
                         <tr *ngFor="let y of alldata">
                             <th scope="row">{{y.user.id}}</th>
                             <td>{{y.remark}}</td>
-                            <td>{{y.department.id}}</td>
-                            <td>{{y.course.id}}</td>
+                            <td *ngIf="y.department.id ==1">Dac</td>
+                            <td *ngIf="y.department.id ==2">Desd</td>
+                            <td *ngIf="y.course.id ==1">Data Structure</td>
+                            <td *ngIf="y.course.id ==2">Java</td>
+                            <td *ngIf="y.course.id ==3">Angular</td>
+                            <td *ngIf="y.course.id ==4">SpringBoot</td>
                             <td>{{y.date}}</td>
                         </tr>
 

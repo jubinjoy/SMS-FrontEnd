@@ -5,9 +5,11 @@ import {Attendance} from 'src/app/Models/attendance';
 import {AttendanceServiceService} from 'src/app/services/attendance-service.service';
 import { formatDate } from '@angular/common';
 import {AuthenticationServiceService} from 'src/app/services/authentication-service.service';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router } from '@angular/router';
 import {StudentAssignment} from 'src/app/Models/student-assignment';
 import {Responsemessage} from 'src/app/Models/responsemessage';
+import {UserServiceService} from 'src/app/services/user-service.service';
+import { User } from 'src/app/Models/user';
 
 @Component({
   selector: 'app-student',
@@ -25,16 +27,34 @@ export class StudentComponent implements OnInit {
   isLoggedIn :boolean = false;
   assignment : StudentAssignment;
   currentFile: File;
+  user : User ;
 
   constructor(private y : StudentServiceService, private authenticationService :AuthenticationServiceService,
     private attendanceService : AttendanceServiceService , @Inject(LOCALE_ID) private locale: string,
-    private router : Router) { 
+    private router : Router,
+    private routeArgs: ActivatedRoute,
+    private userSer : UserServiceService) { 
       this.assignment = new StudentAssignment();
     }
+
+    email: string = this.routeArgs.snapshot.params.email;
 
   ngOnInit(): void {
     this.isLoggedIn = this.authenticationService.isUserLoggedIn();
     console.log('menu ->' + this.isLoggedIn);
+    this.getUser();
+  }
+
+  getUser(){
+    this.userSer.searchService(this.email).subscribe(
+      (op : User)=>{
+        this.user = op ;
+      },
+      (err)=>{
+        alert("error");
+      }
+    )
+
   }
 
    //view Notification
@@ -59,7 +79,7 @@ export class StudentComponent implements OnInit {
     this.submitAssignSts = false;
     this.viewAssignmentSts = false;
     this.viewNotificationSts = false;
-   this.attendanceService.viewAttendanceListService().subscribe(
+   this.attendanceService.searchAttendanceService(this.user.id).subscribe(
      (data : Attendance[])=>{
       for (var i = 0; i < data.length; i++) {
         data[i].date = formatDate(data[i].date, 'dd-MM-yyyy', this.locale);
